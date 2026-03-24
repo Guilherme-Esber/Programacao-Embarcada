@@ -1,0 +1,57 @@
+#include <stdio.h>
+
+void main()
+{
+    int tipo;
+    float area, preco, custo;
+
+    printf("Tipo 1: ervas daninhas R$50,00 por 1000 m2\n");
+    printf("Tipo 2: gafanhotos R$100,00 por 1000 m2\n");
+    printf("Tipo 3: broca R$150,00 por 1000 m2\n");
+    printf("Tipo 4: todos os tipos R$250,00 por 1000 m2\n");
+    printf("Escolha o tipo: ");
+    scanf("%d", &tipo);
+
+    switch(tipo)
+    {
+    case 1:
+        preco = 50.f;
+        break;
+    case 2:
+        preco = 100.f;
+        break;
+    case 3:
+        preco = 150.f;
+        break;
+    case 4:
+        preco = 250.f;
+        break;
+    }
+
+    printf("Insira a area: ");
+    scanf("%f", &area);
+
+    custo = (area / 1000) * preco;
+
+    if (area > 2000 && custo <= 750)
+    {
+        custo = (custo - (custo * 0.05));
+    }
+
+    else if (area <= 2000 && custo > 750)
+    {
+        custo = (custo - (custo * 0.10));
+    }
+
+    else if (area > 2000 && custo > 750)
+    {
+        custo = (custo - (custo * 0.05));
+        custo = (custo - 750);
+        custo = (custo - (custo * 0.10));
+        custo = (custo + 750);
+    }
+
+    printf("O valor e R$ %.2f", custo);
+
+    return 0;
+}
