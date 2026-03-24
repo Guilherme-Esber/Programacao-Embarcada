@@ -26,6 +26,9 @@ void main()
     case 4:
         preco = 250.f;
         break;
+    default:
+        printf("numero errado");
+        return 1;
     }
 
     printf("Insira a area: ");
