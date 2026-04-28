@@ -1,7 +1,7 @@
 #include "led.h"
 
-#define TRISD (*(volatile __near unsigned char*) 0xF95)
-#define PORTD (*(volatile __near unsigned char*) 0xF83)
+#define TRISD (*(volatile __near unsigned char*) 0xF95) // se colocar isso no .h quem usar o codigo pode usar os define tambem
+#define PORTD (*(volatile __near unsigned char*) 0xF83) // deixando no .c so ele pode usar
 
 void ConfigurarLed(void){
     TRISD = 0x00;
