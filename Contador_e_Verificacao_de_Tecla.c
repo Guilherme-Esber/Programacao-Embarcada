@@ -30,7 +30,7 @@ void main(void) {
     }
 }
 
-//
+// a tecla some apos soltar, para arrumar isso seria necessario colocar outra variavel que nao mude na mesma hora que solte o botao (teclant = tecla = 0 no inicio do loop)
 
 unsigned char kpRead(void) {
     switch (valor) {
