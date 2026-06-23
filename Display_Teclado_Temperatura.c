@@ -3,6 +3,7 @@
 #include "ssd.h"
 #include "timer.h"
 #include "keypad.h"
+#include "adc.h"
 
 char flag = 0;
 unsigned int ADvalor = 0;
@@ -23,7 +24,7 @@ void Int(void) __interrupt() {
     }
 }
 
-unsigned char ler_tecla_formatada(void) {
+unsigned char tecla(void) {
 
     // Testa qual bit está ativo e retorna o valor correspondente ao SSD
     // Assumindo que A = 10 e B = 11 no mapeamento do display ssd.h
@@ -44,11 +45,7 @@ void main(void) {
     ssdInit();
     timerInit();
     kpInit();
-
-    //Do adc Init
-    ADCON0 = 0b00000001; //seleciona o canal 0 e liga o ad
-    ADCON1 = 0b00001110; //apenas AN0 é analogico, a referencia é baseada na fonte
-    ADCON2 = 0b10101010; //FOSC /32, Alinhamento à direita e tempo de conv = 12 TAD
+    adcInit();
 
     BitClr(RCON, 7);
     BitSet(INTCON, 7);
@@ -70,10 +67,9 @@ void main(void) {
         temp = ADvalor / 2;
 
         ssdUpdate();
-        ssdDigit(ler_tecla_formatada(), 0);
+        ssdDigit(tecla(), 0);
         ssdDigit((temp % 10), 1);
         ssdDigit((temp / 10) % 10, 2);
         ssdDigit((temp / 100) % 10, 3);
     }
 }
-
